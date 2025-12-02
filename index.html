@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuclear Containment Escape Room Check</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #004d40; /* Dark Teal Background */
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        #container {
+            background-color: #00796b; /* Medium Teal */
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            width: 90%;
+            max-width: 450px;
+        }
+        h1 {
+            color: #ffeb3b; /* Bright Yellow */
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        #code-input {
+            padding: 15px;
+            margin: 10px 0 20px 0;
+            width: 80%;
+            max-width: 250px;
+            font-size: 1.5em;
+            text-transform: uppercase;
+            text-align: center;
+            border: 3px solid #ffeb3b;
+            border-radius: 8px;
+            outline: none;
+        }
+        #check-button {
+            background-color: #ffeb3b;
+            color: #004d40;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        #check-button:hover {
+            background-color: #fdd835;
+        }
+        #message {
+            margin-top: 30px;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        .success {
+            color: #a8ffb1; /* Light Green */
+            background-color: #2e7d32; /* Dark Green */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .error {
+            color: #ff8a80; /* Light Red */
+        }
+        .festive {
+            font-size: 3em;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <h1>Nuclear Containment Escape Room</h1>
+    <p>Enter the 5-letter combination:</p>
+    <input type="text" id="code-input" maxlength="5" placeholder="A B C D A">
+    <button id="check-button" onclick="checkCode()">Check Code</button>
+    <div id="message"></div>
+</div>
+
+<script>
+    // The correct code is BCD BA (based on the answers to the 5 clues)
+    const CORRECT_CODE = "BCDBA";
+
+    function checkCode() {
+        const inputElement = document.getElementById('code-input');
+        const messageElement = document.getElementById('message');
+        
+        // Sanitize the input: convert to uppercase and remove spaces
+        const userCode = inputElement.value.toUpperCase().replace(/\s/g, '');
+
+        if (userCode === CORRECT_CODE) {
+            // Success Case
+            messageElement.innerHTML = `
+                <div class="success">
+                    <span class="festive">🎉 ESCAPED! 🥳</span><br><br>
+                    Congratulations! You successfully contained the nuclear threat and broke the code.
+                </div>
+            `;
+        } else {
+            // Failure Case
+            messageElement.innerHTML = `<span class="error">INCORRECT CODE. Please try again!</span>`;
+        }
+    }
+</script>
+
+</body>
+</html>
